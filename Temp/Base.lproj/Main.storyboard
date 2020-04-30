@@ -7,10 +7,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Meme View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="Temp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="MemeViewController" customModule="Temp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="480" height="320"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -61,13 +61,13 @@
                                 <color key="barTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </toolbar>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="BOTTOM" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="og9-FX-hht">
-                                <rect key="frame" x="189" y="235" width="102" height="30"/>
+                                <rect key="frame" x="16" y="233.5" width="448" height="31.5"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="25"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters"/>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="TOP" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="9MU-Kv-XQc">
-                                <rect key="frame" x="216" y="57" width="48" height="30"/>
+                                <rect key="frame" x="16" y="57" width="448" height="31.5"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="25"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters"/>
@@ -77,15 +77,19 @@
                         <constraints>
                             <constraint firstItem="Nvf-X8-GHh" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="2mZ-6d-69N"/>
                             <constraint firstAttribute="bottom" secondItem="Nvf-X8-GHh" secondAttribute="bottom" id="4ax-8z-0rf"/>
+                            <constraint firstItem="og9-FX-hht" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="EHI-xi-btQ"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="9MU-Kv-XQc" secondAttribute="trailing" constant="16" id="FhO-ep-umB"/>
                             <constraint firstItem="Lcb-Wp-zmH" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="Iei-RA-DbR"/>
                             <constraint firstItem="9MU-Kv-XQc" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="LKL-d5-fZR"/>
                             <constraint firstItem="Nvf-X8-GHh" firstAttribute="top" secondItem="og9-FX-hht" secondAttribute="bottom" constant="15" id="POV-4W-1FX"/>
+                            <constraint firstItem="9MU-Kv-XQc" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="Qcn-N9-hdR"/>
                             <constraint firstItem="Lcb-Wp-zmH" firstAttribute="top" secondItem="q2m-Xd-Oqn" secondAttribute="bottom" id="RP7-M3-0Vd"/>
                             <constraint firstItem="Lcb-Wp-zmH" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="TLB-UF-dHm"/>
                             <constraint firstAttribute="trailing" secondItem="Nvf-X8-GHh" secondAttribute="trailing" id="Vb1-QG-IFI"/>
                             <constraint firstItem="og9-FX-hht" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="aBY-58-RkU"/>
                             <constraint firstAttribute="trailing" secondItem="q2m-Xd-Oqn" secondAttribute="trailing" id="hDG-EF-huS"/>
                             <constraint firstItem="Nvf-X8-GHh" firstAttribute="top" secondItem="Lcb-Wp-zmH" secondAttribute="bottom" id="hib-zr-PPk"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="og9-FX-hht" secondAttribute="trailing" constant="16" id="nbV-c7-08n"/>
                             <constraint firstItem="q2m-Xd-Oqn" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="rV5-YZ-CoJ"/>
                             <constraint firstItem="9MU-Kv-XQc" firstAttribute="top" secondItem="q2m-Xd-Oqn" secondAttribute="bottom" constant="25" id="rt7-wU-aGZ"/>
                             <constraint firstItem="q2m-Xd-Oqn" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="sF0-d6-oJf"/>
@@ -111,6 +115,6 @@
     </scenes>
     <resources>
         <image name="camera" catalog="system" width="128" height="96"/>
-        <image name="square.and.arrow.up" catalog="system" width="115" height="128"/>
+        <image name="square.and.arrow.up" catalog="system" width="32" height="32"/>
     </resources>
 </document>

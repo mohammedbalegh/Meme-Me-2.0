@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate {
+class MemeViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate {
     
     @IBOutlet weak var toolbar: UIToolbar!
     
@@ -24,9 +24,28 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     
     @IBOutlet weak var navBar: UINavigationBar!
     
+    let attributes: [NSAttributedString.Key: Any] = [
+               .foregroundColor: UIColor.white,
+               .font: UIFont(name: "Impact", size: 40)!,
+               .strokeColor: UIColor.black,
+               .strokeWidth: -4
+           ]
+    
+    func textProperties (toTextField textField: UITextField,_ text: String)
+    {
+        textField.defaultTextAttributes =  self.attributes
+        textField.text = text
+        textField.textAlignment = NSTextAlignment.center
+        textField.delegate = self
+        textField.autocapitalizationType = .allCharacters
+        textField.adjustsFontSizeToFitWidth = true
+        
+    }
+    
+    
     @IBAction func cancelButton(_ sender: Any) {
-        topText.text = "TOP"
-        bottomText.text = "BOTTOM"
+        textProperties(toTextField: topText, "TOP")
+        textProperties(toTextField: bottomText, "BOTTOM")
         imagePickerView.image = nil
     }
     
@@ -34,27 +53,16 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         super.viewDidLoad()
         
         shareButton.isEnabled = false
+        cameraButon.isEnabled = UIImagePickerController.isSourceTypeAvailable(.camera)
         
-        topText.delegate = self
-        bottomText.delegate = self
+        textProperties(toTextField: topText, "TOP")
+        textProperties(toTextField: bottomText, "BOTTOM")
         
-        let attributes: [NSAttributedString.Key: Any] = [
-            .foregroundColor: UIColor.white,
-            .font: UIFont(name: "Impact", size: 25)!,
-            .strokeColor: UIColor.black,
-            .strokeWidth: -4
-        ]
-        topText.adjustsFontSizeToFitWidth = true
-        bottomText.adjustsFontSizeToFitWidth = true
-        
-        topText.defaultTextAttributes = attributes
-        bottomText.defaultTextAttributes = attributes
     }
     
     override func viewWillAppear(_ animated: Bool) {
         
         super.viewWillAppear(animated)
-        cameraButon.isEnabled = UIImagePickerController.isSourceTypeAvailable(.camera)
         keyboardNotifications()
     }
     
@@ -105,20 +113,23 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
     
     func generateMemedImage() -> UIImage {
-        toolbar.isHidden = true
-        navBar.isHidden = true
+        hideToolbars(true)
         // Render view to an image
         UIGraphicsBeginImageContext(self.view.frame.size)
         view.drawHierarchy(in: self.view.frame, afterScreenUpdates: true)
         let memedImage:UIImage = UIGraphicsGetImageFromCurrentImageContext()!
         UIGraphicsEndImageContext()
         
-        toolbar.isHidden = false
-        navBar.isHidden = false
+        hideToolbars(false)
         
         shareButton.isEnabled = true
         
         return memedImage
+    }
+    
+    func hideToolbars(_ hide: Bool) {
+        toolbar.isHidden = hide
+        navBar.isHidden = hide
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -132,24 +143,26 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         let activityController = UIActivityViewController(activityItems: [memedImage], applicationActivities: nil)
         activityController.completionWithItemsHandler = { activity, success, items, error in
             self.save()
-            self.dismiss(animated: true, completion: nil)
+            
         }
         
+        dismiss(animated: true, completion: nil)
         present(activityController, animated: true, completion: nil)
     }
     
     
     @IBAction func pickAnImageFromAlbum(_ sender: Any) {
-        let pickerController = UIImagePickerController()
-        pickerController.delegate = self
-        pickerController.sourceType = .photoLibrary
-        present(pickerController, animated: true, completion: nil)
+        openImagePicker(.photoLibrary)
     }
     
     @IBAction func pickAnImageFromCamera(_ sender: Any) {
+        openImagePicker(.camera)
+    }
+    
+    func openImagePicker(_ type: UIImagePickerController.SourceType) {
         let pickerController = UIImagePickerController()
         pickerController.delegate = self
-        pickerController.sourceType = .camera
+        pickerController.sourceType = type
         present(pickerController, animated: true, completion: nil)
     }
     
