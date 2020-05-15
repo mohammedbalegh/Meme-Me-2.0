@@ -7,3 +7,16 @@
 //
 
 import Foundation
+import UIKit
+
+class MemeMeTableViewCell: UITableViewCell {
+    
+    @IBOutlet weak var cellImage: UIImageView!
+    
+    @IBOutlet weak var cellTopLabel: UILabel!
+    
+    @IBOutlet weak var cellBottomLabel: UILabel!
+    
+    @IBOutlet weak var cellMaimLabel: UILabel!
+    
+}

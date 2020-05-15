@@ -63,13 +63,18 @@ class MemeViewController: UIViewController, UIImagePickerControllerDelegate, UIN
     override func viewWillAppear(_ animated: Bool) {
         
         super.viewWillAppear(animated)
+        
+        self.tabBarController?.tabBar.isHidden = true
         keyboardNotifications()
+        
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         
         super.viewWillDisappear(animated)
         unsubscribeKeyboardNotifications()
+        self.tabBarController?.tabBar.isHidden = false
+        
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
@@ -109,7 +114,12 @@ class MemeViewController: UIViewController, UIImagePickerControllerDelegate, UIN
     func save() {
         let memedImage = generateMemedImage()
         // Create the meme
-        _ = Meme(top: topText.text!, bottom: bottomText.text!, image: imagePickerView.image!, memedImage: memedImage)
+        let meme = Meme(top: topText.text!, bottom: bottomText.text!, image: imagePickerView.image!, memedImage: memedImage)
+        
+        let object = UIApplication.shared.delegate
+        let appDelegate = object as! AppDelegate
+        
+        appDelegate.memes.append(meme)
     }
     
     func generateMemedImage() -> UIImage {
@@ -173,6 +183,8 @@ class MemeViewController: UIViewController, UIImagePickerControllerDelegate, UIN
             shareButton.isEnabled = true
             dismiss(animated: true, completion: nil)
         }
+        
+        
         
         
     }
